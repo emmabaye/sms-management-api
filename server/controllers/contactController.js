@@ -109,7 +109,7 @@ class ContactController {
             message: updated === 1 ?
               "Contact deleted successfully" : "Contact not deleted successfully"
           }));
-      }).catch(e =>  res.status(500).send({
+      }).catch(e => res.status(500).send({
         status: ' Server Error',
         message: 'Cannot retrieve contact'
       }));

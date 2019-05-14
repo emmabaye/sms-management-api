@@ -1,5 +1,5 @@
-//import path from 'path';
 import { ContactController, MessageController } from '../../controllers';
+import { validatePhoneNumber, validateContact, validateSMS } from "../../middlewares/validation";
 
 const routes = (app) => {
   app.route('/api/v1')
@@ -7,25 +7,25 @@ const routes = (app) => {
 
   app.route('/api/v1/contacts')
     .get(ContactController.getAllContacts)
-    .put(ContactController.updateContact)
-    .post(ContactController.addContact);
+    .post(validateContact, ContactController.addContact)
+    .put(validateContact, ContactController.updateContact);
 
   app.route('/api/v1/contacts/:phoneNumber')
-    .get(ContactController.getContact)
-    .delete(ContactController.deleteContact);
+    .get(validatePhoneNumber, ContactController.getContact)
+    .delete(validatePhoneNumber, ContactController.deleteContact);
 
   app.route('/api/v1/messages')
     .get(MessageController.getAllMessages)
-    .post(MessageController.sendMessage);
+    .post(validateSMS, MessageController.sendMessage);
 
   app.route('/api/v1/messages/:phoneNumber/inbox')
-    .get(MessageController.getReceivedMessages);
+    .get(validatePhoneNumber, MessageController.getReceivedMessages);
 
   app.route('/api/v1/messages/:phoneNumber/sentbox')
-    .get(MessageController.getSentMessages);
+    .get(validatePhoneNumber, MessageController.getSentMessages);
 
   app.route('/api/v1/messages/:phoneNumber/all')
-    .get(MessageController.getContactMessages);
+    .get(validatePhoneNumber, MessageController.getContactMessages);
 };
 
 export default routes;
