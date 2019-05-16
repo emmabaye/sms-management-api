@@ -37,7 +37,7 @@ export const validateSMS = (req, res, next) => {
   if (!req.body.receiver || !validator.isMobilePhone(req.body.receiver, 'any')) {
     return res.status(400).send({
       status: "Error",
-      message: "Number of sender is required",
+      message: "Number of receiver is required",
     });
   }
 
