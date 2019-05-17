@@ -31,7 +31,7 @@ git clone https://github.com/emmabaye/sms-management-api.git my-project
 # Change directory
 cd my-project
 
-# Populate environment variables
+# Install dependencies
 npm install
 
 ```
